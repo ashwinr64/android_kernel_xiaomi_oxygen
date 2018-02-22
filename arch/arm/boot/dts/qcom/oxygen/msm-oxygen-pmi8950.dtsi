@@ -1,0 +1,57 @@
+/*
+ * Copyright (c) 2015-2018, The Linux Foundation. All rights reserved.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 and
+ * only version 2 as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ */
+
+&pmi8950_mpps {
+    mpp@a100 {
+        status = "okay";
+    };
+};
+
+&pmi8950_charger {
+    /delete-property/ qcom,autoadjust-vfloat;
+};
+
+&spmi_bus {
+	qcom,pmi8950@2 {
+        qcom,leds@a100 {
+			qcom,led_mpp_2 {
+				label = "mpp";
+				linux,name = "button-backlight";
+				linux,default-trigger = "none";
+				qcom,default-state = "off";
+				qcom,max-current = <40>;
+				qcom,current-setting = <5>;
+				qcom,id = <6>;
+				qcom,source-sel = <1>;
+				qcom,mode-ctrl = <0x60>;
+				qcom,mode = "manual";
+			};
+        };
+	};
+};
+
+&wled {
+    qcom,switch-freq-khz = <600>;
+    /delete-property/ qcom,en-ext-pfet-sc-pro;
+    qcom,en-cabc;
+};
+
+&pmi8950_torch0 {
+    qcom,max-current = <100>;
+    qcom,current = <100>;
+};
+
+&pmi8950_torch1 {
+    qcom,max-current = <100>;
+    qcom,current = <100>;
+};
